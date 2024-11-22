@@ -1,4 +1,4 @@
-﻿using StripsBL.Models;
+﻿using StripsDL.Models;
 
 namespace StripsDL;
 
@@ -12,7 +12,7 @@ public class Program
 
     public void ReadData(string path = @"C:\Users\Domie\OneDrive\Bureaublad\HoGent\2de-jaar-graduaat\PROG2\StripASP.NET\stripsData.txt")
     {
-        using (var context = new StripContext())
+        using (var context = new StripsContext())
         {
             var auteurs = new Dictionary<string, Auteur>();
             var reeksen = new Dictionary<string, Reeks>();

@@ -10,7 +10,7 @@ using StripsDL;
 
 namespace StripsDL.Migrations
 {
-    [DbContext(typeof(StripContext))]
+    [DbContext(typeof(StripsContext))]
     partial class StripContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

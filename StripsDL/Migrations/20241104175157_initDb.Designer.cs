@@ -11,7 +11,7 @@ using StripsDL;
 
 namespace StripsDL.Migrations
 {
-    [DbContext(typeof(StripContext))]
+    [DbContext(typeof(StripsContext))]
     [Migration("20241104175157_initDb")]
     partial class initDb
     {
