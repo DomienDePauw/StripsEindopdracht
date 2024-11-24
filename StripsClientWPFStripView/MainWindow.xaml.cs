@@ -46,9 +46,9 @@ namespace StripsClientWPFStripView
                 PublisherTextBox.Text = strip.Uitgeverij;
                 AuthorsListBox.ItemsSource = strip.Auteurs.Select(a => a.Auteur).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"Er is een fout opgetreden: {ex.Message}", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Er is een fout opgetreden.");
             }
         }
     }
