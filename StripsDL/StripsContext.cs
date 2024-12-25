@@ -10,10 +10,10 @@ namespace StripsDL;
 
 public class StripsContext : DbContext
 {
-    public DbSet<Strip> Strips { get; set; }
-    public DbSet<Auteur> Auteurs { get; set; }
-    public DbSet<Reeks> Reeksen { get; set; }
-    public DbSet<Uitgeverij> Uitgeverijen { get; set; }
+    public DbSet<StripEF> Strips { get; set; }
+    public DbSet<AuteurEF> Auteurs { get; set; }
+    public DbSet<ReeksEF> Reeksen { get; set; }
+    public DbSet<UitgeverijEF> Uitgeverijen { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

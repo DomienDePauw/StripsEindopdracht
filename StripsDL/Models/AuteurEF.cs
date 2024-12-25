@@ -2,17 +2,17 @@
 
 namespace StripsDL.Models;
 
-public class Auteur
+public class AuteurEF
 {
-    public Auteur()
+    public AuteurEF()
     {
 
     }
-    public Auteur(string naam)
+    public AuteurEF(string naam)
     {
         Naam = naam;
     }
-    public Auteur(string naam, string emailadres)
+    public AuteurEF(string naam, string emailadres)
     {
         Naam = naam;
         EmailAdres = emailadres;
@@ -21,5 +21,5 @@ public class Auteur
     [Required]
     public string Naam { get; set; }
     public string? EmailAdres { get; set; }
-    public ICollection<Strip> Strips { get; set; } = new List<Strip>();
+    public ICollection<StripEF> Strips { get; set; } = new List<StripEF>();
 }

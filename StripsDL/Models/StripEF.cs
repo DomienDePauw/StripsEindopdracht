@@ -6,18 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace StripsDL.Models;
-public class Strip
+public class StripEF
 {
-    public Strip()
+    public StripEF()
     {
 
     }
-    public Strip(string titel, int reeksNummer)
+    public StripEF(string titel, int reeksNummer)
     {
         Titel = titel;
         ReeksNummer = reeksNummer;
     }
-    public Strip(string titel, List<Auteur> auteurs, Uitgeverij uitgeverij, Reeks reeks, int reeksNummer)
+    public StripEF(string titel, List<AuteurEF> auteurs, UitgeverijEF uitgeverij, ReeksEF reeks, int reeksNummer)
     {
         Titel = titel;
         Auteurs = auteurs;
@@ -30,9 +30,9 @@ public class Strip
     [Required]
     public string Titel { get; set; }
     [Required]
-    public ICollection<Auteur> Auteurs { get; set; } = new List<Auteur>();
+    public ICollection<AuteurEF> Auteurs { get; set; } = new List<AuteurEF>();
     [Required]
-    public Uitgeverij Uitgeverij { get; set; }
-    public Reeks Reeks { get; set; }
+    public UitgeverijEF Uitgeverij { get; set; }
+    public ReeksEF Reeks { get; set; }
     public int? ReeksNummer { get; set; }
 }

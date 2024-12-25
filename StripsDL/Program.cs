@@ -7,17 +7,27 @@ public class Program
     static void Main(string[] args)
     {
         Program p = new Program();
+        p.DeleteDb();
         p.ReadData();
     }
+    public void DeleteDb()
+    {
+        using (var context = new StripsContext())
+        {
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
+            Console.WriteLine("Database is opnieuw aangemaakt");
+        }
+    }
     public void ReadData(string path = @"C:\Users\Domie\OneDrive\Bureaublad\HoGent\2de-jaar-graduaat\PROG2\StripASP.NET\stripsData.txt")
     {
         using (var context = new StripsContext())
         {
-            var auteurs = new Dictionary<string, Auteur>();
-            var reeksen = new Dictionary<string, Reeks>();
-            var uitgeverijen = new Dictionary<string, Uitgeverij>();
-            var strips = new HashSet<Strip>();
+            var auteurs = new Dictionary<string, AuteurEF>();
+            var reeksen = new Dictionary<string, ReeksEF>();
+            var uitgeverijen = new Dictionary<string, UitgeverijEF>();
+            var strips = new HashSet<StripEF>();
 
             using (StreamReader sr = new StreamReader(path))
             {
@@ -41,13 +51,13 @@ public class Program
 
                     foreach (var a in auteursNamen) 
                     {
-                        auteurs.TryAdd(a, new Auteur(a));
+                        auteurs.TryAdd(a, new AuteurEF(a));
                     }
 
-                    reeksen.TryAdd(reeksNaam, new Reeks(reeksNaam));
-                    uitgeverijen.TryAdd(uitgeverijNaam, new Uitgeverij(uitgeverijNaam));
+                    reeksen.TryAdd(reeksNaam, new ReeksEF(reeksNaam));
+                    uitgeverijen.TryAdd(uitgeverijNaam, new UitgeverijEF(uitgeverijNaam));
 
-                    var strip = new Strip
+                    var strip = new StripEF
                     {
                         Titel = titel,
                         Uitgeverij = uitgeverijen[uitgeverijNaam],

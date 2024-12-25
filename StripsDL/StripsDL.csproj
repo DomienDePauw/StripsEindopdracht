@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StripsBL\StripsBL.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using StripsDL;
+﻿using Microsoft.EntityFrameworkCore;
+using StripsBL.Interfaces;
+using StripsBL.Model;
+using StripsDL.Mappers;
 using StripsDL.Models;
 
-namespace StripsBL;
+namespace StripsDL;
 
-public class StripsRepository
+public class StripsRepository : IStripsRepository
 {
     private readonly StripsContext _context;
 
@@ -19,17 +16,21 @@ public class StripsRepository
     }
     public Strip GetStripById(int id)
     {
-        return _context.Strips
-                       .Include(s => s.Auteurs)
-                       .Include(s => s.Uitgeverij)
-                       .Include(s => s.Reeks)
-                       .FirstOrDefault(s => s.Id == id);
+        var s = _context.Strips
+                              .Include(s => s.Auteurs)
+                              .Include(s => s.Uitgeverij)
+                              .Include(s => s.Reeks)
+                              .FirstOrDefault(s => s.Id == id);
+
+        return StripMapper.MapToDomain(s);
     }
     public Reeks GetReeksById(int id)
     {
-        return _context.Reeksen
-                       .Include(r => r.Strips)
-                       .FirstOrDefault(r => r.Id == id);
+        var r = _context.Reeksen
+                              .Include(r => r.Strips)
+                              .FirstOrDefault(r => r.Id == id);
+
+        return ReeksMapper.MapToDomain(r);
     }
 
     public void UpdateReeksVanStrip(int stripId, int nieuweReeksId)
@@ -72,6 +73,7 @@ public class StripsRepository
         strip.Auteurs.Add(auteur);
         _context.SaveChanges();
     }
+
     public void VerwijderAuteurVanStrip(int stripId, int auteurId)
     {
         var strip = _context.Strips.Include(s => s.Auteurs).FirstOrDefault(s => s.Id == stripId);
@@ -152,16 +154,12 @@ public class StripsRepository
         var uitgeverij = _context.Uitgeverijen.FirstOrDefault(u => u.Id == uitgeverijId);
         if (uitgeverij == null) 
         {
-            throw new ArgumentException($"Uitgeverij met id {uitgeverijId} niet gevonden.");
+            throw new Exception($"Uitgeverij met id {uitgeverijId} niet gevonden.");
         }
-        if (!string.IsNullOrWhiteSpace(nieuweNaam)) 
-        {
-            uitgeverij.Naam = nieuweNaam;
-        }
-        if (!string.IsNullOrWhiteSpace(nieuwAdres))
-        {
-            uitgeverij.Adres = nieuwAdres;
-        }
+
+        uitgeverij.Naam = nieuweNaam;
+        uitgeverij.Adres = nieuwAdres;
+
         _context.SaveChanges();
     }
 }

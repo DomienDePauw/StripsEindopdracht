@@ -1,18 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace StripsDL.Models;
-public class Reeks
+public class ReeksEF
 {
-    public Reeks()
+    public ReeksEF()
     {
 
     }
-    public Reeks(string naam)
+    public ReeksEF(string naam)
     {
         Naam = naam;
     }
     public int Id { get; set; }
     [Required]
     public string Naam { get; set; }
-    public ICollection<Strip> Strips { get; set; } = new List<Strip>();
+    public ICollection<StripEF> Strips { get; set; } = new List<StripEF>();
 }

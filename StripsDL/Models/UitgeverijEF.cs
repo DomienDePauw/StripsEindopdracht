@@ -2,17 +2,17 @@
 
 namespace StripsDL.Models;
 
-public class Uitgeverij
+public class UitgeverijEF
 {
-    public Uitgeverij()
+    public UitgeverijEF()
     {
         
     }
-    public Uitgeverij(string naam)
+    public UitgeverijEF(string naam)
     {
         Naam = naam;
     }
-    public Uitgeverij(string naam, string adres)
+    public UitgeverijEF(string naam, string adres)
     {
         Naam = naam;
         Adres = adres;
@@ -20,5 +20,5 @@ public class Uitgeverij
     public int Id { get; set; }
     public string Naam { get; set; }
     public string? Adres { get; set; }
-    public ICollection<Strip> Strips { get; set; } = new List<Strip>();
+    public ICollection<StripEF> Strips { get; set; } = new List<StripEF>();
 }
